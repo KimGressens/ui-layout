@@ -613,6 +613,8 @@ angular.module('ui.layout', [])
           e.preventDefault();
           e.stopPropagation();
 
+          scope.$emit("uiLayoutDragStart");
+
           htmlElement.on('mousemove touchmove', function(event) {
             scope.$apply(angular.bind(ctrl, ctrl.mouseMoveHandler, event));
           });
@@ -620,6 +622,8 @@ angular.module('ui.layout', [])
         });
 
         htmlElement.on('mouseup touchend', function(event) {
+          scope.$emit("uiLayoutDragStop");
+          
           scope.$apply(angular.bind(ctrl, ctrl.mouseUpHandler, event));
           htmlElement.off('mousemove touchmove');
         });
